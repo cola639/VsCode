@@ -6,9 +6,39 @@
   // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
   // Placeholders with the same ids are connected.
 
-  "Print to dClass:": {
-    "prefix": "dynamicClass",
+  "Print to :c:": {
+    "prefix": ":Class",
     "body": [":class=[ condition ? 'conditionClass' : 'otherClass', 'default']"],
     "description": "Log output to console"
+  },
+  "Print to tcf": {
+    "prefix": "tcf",
+    "body": ["fun().then((res) => {})", ".catch(() => {})", ".finally(()=>{})"],
+    "description": "Async chain operation "
+  },
+  "Print to exf": {
+    "prefix": "exf",
+    "body": ["export function name(){}"],
+    "description": "Export function"
+  },
+  "Print to rst": {
+    "prefix": "rst",
+    "body": ["name: {type: String,required: true},"],
+    "description": "Log output to props string"
+  },
+  "Print to rnt": {
+    "prefix": "rnt",
+    "body": ["name: {type: Number,required: true},"],
+    "description": "Log output to props Number"
+  },
+  "Print to rot": {
+    "prefix": "rot",
+    "body": ["name: {type: Object,required: true},"],
+    "description": "Log output to props Number"
+  },
+  "Print to rbt": {
+    "prefix": "rbt",
+    "body": ["name: {type: Boolean,required: true},"],
+    "description": "Log output to props Boolean"
   }
 }
