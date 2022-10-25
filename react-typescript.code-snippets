@@ -9,14 +9,52 @@
   "Print to rfc": {
     "prefix": "rfc",
     "body": [
-      "import {FC} from 'react'",
+      "import { FC,useState, useEffect, useCallback, useMemo } from 'react'",
       "",
-      "export interface INameProps{}",
+      "export interface I${TM_FILENAME_BASE}Props{}",
       "",
-      "const Name: FC<INameProps> = (props) => {return <div>content</div>}",
+      "const ${TM_FILENAME_BASE}: FC<I${TM_FILENAME_BASE}Props> = ({}) => {",
       "",
-      "export default Name"
+      "useEffect(() => {}, [])",
+      "useCallback(() => {}, []) ",
+      "useMemo(() => {}, [])",
+      "",
+      " return <div>content</div>",
+      "}",
+      "",
+      "export default ${TM_FILENAME_BASE}"
     ],
     "description": "Log output to react component template"
+  },
+  "Print to tcf": {
+    "prefix": "tcf",
+    "body": [
+      "asyncFun().then((res) => {console.log(res)})",
+      ".catch((err) => {console.log(err)})",
+      ".finally(()=>{})"
+    ],
+    "description": "Async chain operation "
+  },
+  "Print to useState": {
+    "prefix": "useState",
+    "body": [" const [value, setValue] = useState('')"],
+    "description": "Log output to react useState template"
+  },
+  "Print to useEffect": {
+    "prefix": "useEffect",
+    "body": [
+      "useCallback(() => { asyncFun().then((res) => {console.log(res)}).catch((err) => {console.log(err)}).finally(()=>{})  }, [detectiveArray]) "
+    ],
+    "description": "Log output to react useEffect template"
+  },
+  "Print to useMemo": {
+    "prefix": "useMemo",
+    "body": ["const needRender = useMemo(() => { excuteLogic }, [detectiveArray])"],
+    "description": "Log output to react useMemo template"
+  },
+  "Print to useCallback": {
+    "prefix": "useMemo",
+    "body": ["const handleFunction = useMemo(() => { excuteLogic }, [detectiveArray])"],
+    "description": "Log output to react useCallback template"
   }
 }
