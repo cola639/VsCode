@@ -6,7 +6,7 @@
   // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
   // Placeholders with the same ids are connected.
 
-  "Print to rfc": {
+  "React function template": {
     "prefix": "rfc",
     "body": [
       "import { FC,useState, useEffect, useCallback, useMemo } from 'react'",
@@ -19,14 +19,14 @@
       "useCallback(() => {}, []) ",
       "useMemo(() => {}, [])",
       "",
-      " return <div>content</div>",
+      " return <div>${TM_FILENAME_BASE}</div>",
       "}",
       "",
       "export default ${TM_FILENAME_BASE}"
     ],
     "description": "Log output to react component template"
   },
-  "Print to tcf": {
+  "React async function template": {
     "prefix": "tcf",
     "body": [
       "asyncFun().then((res) => {console.log(res)})",
@@ -35,26 +35,35 @@
     ],
     "description": "Async chain operation "
   },
-  "Print to useState": {
+  "React useState template": {
     "prefix": "useState",
     "body": [" const [value, setValue] = useState('')"],
     "description": "Log output to react useState template"
   },
-  "Print to useEffect": {
+  "React useEffect template": {
     "prefix": "useEffect",
     "body": [
       "useCallback(() => { asyncFun().then((res) => {console.log(res)}).catch((err) => {console.log(err)}).finally(()=>{})  }, [detectiveArray]) "
     ],
     "description": "Log output to react useEffect template"
   },
-  "Print to useMemo": {
+  "React useMemo template": {
     "prefix": "useMemo",
-    "body": ["const needRender = useMemo(() => { excuteLogic }, [detectiveArray])"],
+    "body": [
+      "const needRender = useMemo(() => { excuteLogic }, [detectiveArray])"
+    ],
     "description": "Log output to react useMemo template"
   },
-  "Print to useCallback": {
+  "React useCallback template": {
     "prefix": "useMemo",
-    "body": ["const handleFunction = useMemo(() => { excuteLogic }, [detectiveArray])"],
+    "body": [
+      "const handleFunction = useCallback(() => { excuteLogic }, [detectiveArray])"
+    ],
+    "description": "Log output to react useCallback template"
+  },
+  "React handleEvent template": {
+    "prefix": "handleEvent",
+    "body": ["const handleFunction = () => {}"],
     "description": "Log output to react useCallback template"
   }
 }
