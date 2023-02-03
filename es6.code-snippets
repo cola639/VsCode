@@ -1,0 +1,10 @@
+{
+  // ES6 systanx
+  "Print to forEach:": {
+    "prefix": ":Class",
+    "body": [
+      ":class=[ condition ? 'conditionClass' : 'otherClass', 'default']"
+    ],
+    "description": "Log output to console"
+  }
+}

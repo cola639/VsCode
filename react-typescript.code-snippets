@@ -65,5 +65,10 @@
     "prefix": "handleEvent",
     "body": ["const handleFunction = () => {}"],
     "description": "Log output to react useCallback template"
+  },
+  "Print to global": {
+    "prefix": "scss :global()",
+    "body": [".ParentclassName {:global(.subClassName)}"],
+    "description": "Log output to global css template"
   }
 }
