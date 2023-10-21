@@ -1,0 +1,108 @@
+{
+  "Print to getTryCatch": {
+    "prefix": "tcfpost",
+    "body": [
+      "this.$$toast.loading({",
+      "  duration: 0, // 设置为0时toast不会消失",
+      "  message: '提交中...',",
+      "  forbidClick: true,",
+      "  loadingType: 'spinner'",
+      "})",
+      "",
+      "try {",
+      "  const res = await fun()",
+      "  this.$$toast.success('提交成功')",
+      "} catch (error) {",
+      "  console.error('error',error)",
+      "  this.$$toast.fail('提交失败，请重试')",
+      "} finally {",
+      "  this.$$toast.clear()",
+      "}"
+    ],
+    "description": "Async function with try-catch-finally block"
+  },
+ "Print to postTryCatch": {
+    "prefix": "tcfget",
+    "body": [
+      "this.$$toast.loading({",
+      "  duration: 0, // 设置为0时toast不会消失",
+      "  message: '加载中...',",
+      "  forbidClick: true,",
+      "  loadingType: 'spinner'",
+      "})",
+      "",
+      "try {",
+      "  const res = await fun()",
+      "} catch (error) {",
+      "  console.error('error',error)",
+      "  this.$$toast.fail('获取数据失败')",
+      "} finally {",
+      "  this.$$toast.clear()",
+      "}"
+    ],
+    "description": "Async function with try-catch-finally block"
+  },
+  
+  "Print to exf": {
+    "prefix": "exf",
+    "body": ["export function name(){}"],
+    "description": "Export function"
+  },
+  "Print to rst": {
+    "prefix": "rst",
+    "body": ["name: {type: String,required: true},"],
+    "description": "Log output to props string"
+  },
+  "Print to rnt": {
+    "prefix": "rnt",
+    "body": ["name: {type: Number,required: true},"],
+    "description": "Log output to props Number"
+  },
+  "Print to rot": {
+    "prefix": "rot",
+    "body": ["name: {type: Object,required: true},"],
+    "description": "Log output to props Number"
+  },
+  "Print to rbt": {
+    "prefix": "rbt",
+    "body": ["name: {type: Boolean,required: true},"],
+    "description": "Log output to props Boolean"
+  },
+  "v-deep": {
+    "prefix": "v-deep",
+    "body": ["::v-deep .className{.subClassName{}}"],
+    "description": "Log output to deep css"
+  },
+  "this.$route.query": {
+    "prefix": "v-query",
+    "body": ["const { query } = this.$$route.query"],
+    "description": "this.$route.query is an object"
+  },
+  "v-watch": {
+    "prefix": "v-watch",
+    "body": [
+      "watch:{ name: {handler(newVal, oldVal) {console.log('🚀 >> pieData >> newV', newVal)},",
+      "deep: true}}"
+    ],
+    "description": "this.$route.query is an object"
+  },
+  "v-require": {
+    "prefix": "v-require",
+    "body": ["require('url')"],
+    "description": "v-require"
+  },
+  "complex class arrary type": {
+    "prefix": ":class",
+    "body": [
+      ":class=\"[ condition ? 'conditionClass' : 'otherClass', 'default']\""
+    ],
+    "description": "Log output to console"
+  },
+  "simple class object type": {
+    "prefix": ":classObj",
+    "body": [
+      ":class=\"{'active': isActive, 'text-danger': ieError}\""
+    ],
+    "description": "Log output to console"
+  },
+}
