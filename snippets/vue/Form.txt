@@ -1,0 +1,185 @@
+<template>
+  <div class="wrap">
+    <van-form @submit="submitForm">
+      <div class="divide">登记信息</div>
+      <van-field
+        readonly
+        required
+        :rules="[{ required: true }]"
+        clickable
+        name="datetimePicker"
+        :value="bookForm.applyTime"
+        label="申请时间"
+        placeholder="点击选择申请时间"
+        @click="openDate"
+        :right-icon="!isDetail || isDraft ? 'arrow' : ''"
+      />
+      <van-field
+        :readonly="isDetail && !isDraft"
+        v-model="bookForm.allCount"
+        type="digit"
+        required
+        :rules="[{ required: true }]"
+        maxlength="5"
+        center
+        clearable
+        label="完成场次"
+        placeholder="请输入完成场次"
+      />
+      <van-field
+        readonly
+        required
+        :rules="[{ required: true }]"
+        name="picker"
+        :value="bookForm.typeText"
+        label="申请类型"
+        placeholder="请选择类型"
+        @click="openType"
+      />
+      <van-field
+        readonly
+        required
+        :rules="[{ required: true }]"
+        name="picker"
+        :value="bookForm.applyStarText"
+        label="申请星级"
+        placeholder="请选择星级"
+        @click="openStar"
+      />
+      <van-field required name="uploader" label="文件上传">
+        <template #input>
+          <van-uploader
+            :class="{ hide_upload: isDetail && !isDraft }"
+            :max-count="5"
+            :after-read="info => afterRead(info, 'file')"
+            :max-size="limitedFile * 1024 * 1024"
+            @oversize="ovOverFile"
+            accept=".zip,.doc,.docx,.xls,.xlsx,.txt"
+            v-model="fileList"
+          >
+            <van-button icon="plus" type="info" size="small">上传文件</van-button>
+          </van-uploader>
+        </template>
+      </van-field>
+      <van-field
+        v-model="bookForm.remark"
+        :readonly="isDetail && !isDraft"
+        rows="3"
+        autosize
+        label="备注"
+        type="textarea"
+        maxlength="50"
+        placeholder="请输入备注"
+        show-word-limit
+      />
+      <van-button v-if="isPending" class="btn" round block type="info" native-type="button" @click="withdarw">
+        撤回
+      </van-button>
+      <van-button v-if="!isDetail || isDraft" class="btn" round block type="info" native-type="submit">提交</van-button>
+    </van-form>
+
+    <!-- 弹窗部分 -->
+    <van-calendar v-model="showBookDate" @confirm="onDateConfirm" />
+    <van-popup v-model="showType" position="bottom">
+      <van-picker
+        title="选择申请类型"
+        show-toolbar
+        :columns="typeColumns"
+        @confirm="onTypeConfirm"
+        @cancel="showType = false"
+      />
+    </van-popup>
+    </div>
+</template>
+<script>
+import { getStarDetail, postStar, cancelStar } from '@/api/name'
+import { Dict } from '@/constant'
+
+export default {
+  name: 'FormTemplate',
+  components: {},
+  data() {
+    return {
+      Dict,
+	  isDetail:false,
+      form: {
+      },
+      typeColumns: [
+        { value: '0', text: 'name1' },
+        { value: '1', text: 'name2' }
+      ],
+    }
+  },
+  props: {},
+  created() {
+    document.title = 'name'
+  },
+  mounted() {
+    const id = this.$$router.query
+    console.log('🚀 >> mounted >> id:', id)
+    if (id) this.setDetail(id)
+  },
+  beforeDestroy() {},
+  computed: {
+	isStatus(){
+		return this.state === Dict.state
+	},
+	isHideName(){},
+	showStatusText(){
+		return getStatusValue(state,Dict,valueType)
+	},
+  },
+  watch: {},
+  methods: {
+    async setDetail(id) {
+      console.log('🚀 >> setDetail >> id:', id)
+	  this.isDetail = true
+      this.$toast.loading({
+        duration: 0, // 设置为0时toast不会消失
+        message: '加载中...',
+        forbidClick: true,
+        loadingType: 'spinner'
+      })
+
+      try {
+        const res = await getDetail({ id })
+      } catch (error) {
+        console.log(' error:', error)
+        this.$toast.fail('获取数据失败')
+      } finally {
+        this.$toast.clear()
+      }
+    },
+
+    async afterRead(info, type) {
+      console.log('🚀 >> afterRead >> info, type:', info, type)
+      this.$toast.loading({
+        duration: 0, // 设置为0时toast不会消失
+        message: '提交中...',
+        forbidClick: true,
+        loadingType: 'spinner'
+      })
+
+      try {
+        const { file } = info
+        let postFile = new FormData()
+        postFile.append('file', file)
+
+        const res = await postLecturerRegisterFile(postFile)
+        this.$toast.success('上传成功')
+      } catch (error) {
+        this.$toast.fail('上传失败，请重试')
+      } finally {
+        this.$toast.clear()
+      }
+    },
+
+    async submitForm() {},
+    
+    async withdarw() {},
+
+  }
+}
+</script>
+
+帮我把代码做成 vscde snippet
