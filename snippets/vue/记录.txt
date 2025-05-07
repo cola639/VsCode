@@ -1,0 +1,4 @@
+1 对象数组抽出特定值组成新数组
+const arr = data.map(item => item.value)
+如   [{value:1},...{value:10}]
+抽出 [1,...10]
